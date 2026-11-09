@@ -93,7 +93,7 @@ Undo: the same with `0`.
 
 **Amazon resets it at every boot.** `com.amazon.tv.oobe/.BootCompleteReceiver` sets it back to `0` at ~52–65 s. To keep it:
 1. Declare `android.permission.WRITE_SECURE_SETTINGS`. It is `signature|privileged|development`, so ADB can grant it: `adb shell pm grant <package> android.permission.WRITE_SECURE_SETTINGS` (undo: `pm revoke`).
-2. Register a `ContentObserver` on `Settings.Global.getUriFor("com.amazon.tv.oobe.RESTRICT_REMOTE_BUTTONS")` and put `1` back when it turns `0`. In every restart tested, it was back in under 1 s (6 ms in the last one measured).
+2. Register a `ContentObserver` on `Settings.Global.getUriFor("com.amazon.tv.oobe.RESTRICT_REMOTE_BUTTONS")` and put `1` back when it turns `0`. In every restart tested, it was back in under 1 s (6 ms in the last one measured), and with the real remote Home and the app buttons stayed locked after restarting.
 
 Trade-off: with the lock on, Home does nothing at all. It no longer takes the user anywhere, so the app needs its own way out to Amazon's home and to Settings.
 
@@ -165,6 +165,5 @@ Not tried yet: blocking the update hosts on the router or with a private DNS.
 
 ## Still open
 
-- Confirm with the real remote that Home and the app buttons stay locked after a restart.
 - Turning the TV off from the Stick, and waking the Stick from an app.
 - A new function for Home, Alexa, TV and the app buttons (they can only be locked).

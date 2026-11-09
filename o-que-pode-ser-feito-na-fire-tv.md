@@ -93,7 +93,7 @@ Desfazer: o mesmo com `0`.
 
 **A Amazon desfaz a cada boot.** O `com.amazon.tv.oobe/.BootCompleteReceiver` volta para `0` entre ~52 e ~65 s. Para manter:
 1. Declare `android.permission.WRITE_SECURE_SETTINGS`. Ela é `signature|privileged|development`, então o ADB pode concedê-la: `adb shell pm grant <pacote> android.permission.WRITE_SECURE_SETTINGS` (desfazer: `pm revoke`).
-2. Registre um `ContentObserver` em `Settings.Global.getUriFor("com.amazon.tv.oobe.RESTRICT_REMOTE_BUTTONS")` e ponha `1` de novo quando virar `0`. Em todos os reinícios testados, voltou em menos de 1 s (6 ms na última medição).
+2. Registre um `ContentObserver` em `Settings.Global.getUriFor("com.amazon.tv.oobe.RESTRICT_REMOTE_BUTTONS")` e ponha `1` de novo quando virar `0`. Em todos os reinícios testados, voltou em menos de 1 s (6 ms na última medição), e, com o controle de verdade, Home e os botões de apps continuaram bloqueados depois de reiniciar.
 
 Contrapartida: com o bloqueio, o Home não faz nada. Ele não leva a lugar nenhum, então o app precisa ter o próprio caminho até a home da Amazon e as Configurações.
 
@@ -165,6 +165,5 @@ Ainda não testado: bloquear os endereços de atualização no roteador ou com D
 
 ## Ainda em aberto
 
-- Confirmar com o controle de verdade que Home e os botões de apps continuam bloqueados depois do reinício.
 - Desligar a TV pelo Stick, e acordar o Stick por um app.
 - Dar outra função a Home, Alexa, TV e botões de apps (por enquanto só dá para bloqueá-los).
